@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>tamari | 子供だけの秘密基地夜カフェ</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@400;700&family=Noto+Sans+JP:wght@400;700&display=swap');
+
+        :root {
+            --night-bg: #0f172a;
+            --warm-light: #fbbf24;
+            --accent-orange: #f97316;
+        }
+
+        body {
+            font-family: 'Noto Sans JP', sans-serif;
+            background-color: var(--night-bg);
+            color: #f8fafc;
+            overflow-x: hidden;
+            margin: 0;
+        }
+
+        .kids-font {
+            font-family: 'Zen Maru Gothic', serif;
+        }
+
+        /* Night Sky Background */
+        .stars {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: radial-gradient(circle at center, #1e293b 0%, #0f172a 100%);
+        }
+
+        /* Page Transitions */
+        .page {
+            display: none;
+            min-height: 100vh;
+            padding: 2rem 1rem;
+            animation: fadeIn 0.8s ease-out forwards;
+        }
+
+        .active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Glassmorphism */
+        .glass {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 1.5rem;
+        }
+
+        /* Button Effects */
+        .btn-glow {
+            transition: all 0.3s ease;
+            box-shadow: 0 0 15px rgba(251, 191, 36, 0.2);
+        }
+
+        .btn-glow:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 25px rgba(251, 191, 36, 0.5);
+        }
+
+        /* Kids Route Style */
+        .kids-route {
+            background: linear-gradient(to bottom, #0f172a, #1e1b4b);
+        }
+
+        /* Parents Route Style */
+        .parents-route {
+            background-color: #fdfcfb;
+            color: #334155;
+        }
+
+        .parents-route .glass {
+            background: white;
+            border-color: #e2e8f0;
+            color: #334155;
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="stars" id="starField"></div>
+
+    <!-- 1. TOP PAGE -->
+    <section id="top" class="page active flex flex-col items-center justify-center text-center">
+        <div class="mb-8">
+            <h1 class="kids-font text-6xl md:text-8xl font-bold text-yellow-400 mb-2 drop-shadow-lg">tamari</h1>
+            <p class="text-xl md:text-2xl opacity-90">夜の秘密基地、オープン。</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 w-full max-w-4xl px-4">
+            <button onclick="showPage('kids')" class="glass p-8 btn-glow group">
+                <i class="fa-solid fa-key text-5xl text-yellow-400 mb-4 group-hover:rotate-12 transition-transform"></i>
+                <h2 class="kids-font text-3xl font-bold mb-2 text-white">基地をのぞく</h2>
+                <p class="text-sm opacity-70 text-white">（小学校高学年〜高校生のみんなへ）</p>
+            </button>
+
+            <button onclick="showPage('parents')" class="glass p-8 btn-glow group">
+                <i class="fa-solid fa-shield-heart text-5xl text-blue-400 mb-4 group-hover:scale-110 transition-transform"></i>
+                <h2 class="text-3xl font-bold mb-2 text-white">tamariの約束</h2>
+                <p class="text-sm opacity-70 text-white">（保護者の方へ）</p>
+            </button>
+        </div>
+        
+        <div class="mt-12 opacity-50 text-sm">
+            <p><i class="fa-solid fa-location-dot"></i> どこかの街の、静かな横丁の角。</p>
+        </div>
+    </section>
+
+    <!-- 2. KIDS PAGE -->
+    <section id="kids" class="page kids-route">
+        <div class="max-w-3xl mx-auto">
+            <nav class="flex justify-between items-center mb-10">
+                <button onclick="showPage('top')" class="text-white opacity-60 hover:opacity-100"><i class="fa-solid fa-arrow-left"></i> もどる</button>
+                <span class="kids-font text-2xl text-yellow-400 font-bold">tamari 秘密基地</span>
+            </nav>
+
+            <header class="text-center mb-12">
+                <h2 class="kids-font text-4xl font-bold mb-4">おかえり、<br>ここは君だけの居場所。</h2>
+                <p class="opacity-80">一人で食べるご飯より、誰かと話す時間がスパイス。</p>
+            </header>
+
+            <div class="space-y-8">
+                <!-- Today's Menu -->
+                <div class="glass p-6">
+                    <h3 class="kids-font text-2xl font-bold mb-4 text-orange-400"><i class="fa-solid fa-utensils"></i> 今日のごはん</h3>
+                    <div class="rounded-xl overflow-hidden bg-slate-800 h-48 mb-4 flex items-center justify-center border border-dashed border-slate-600">
+                        <span class="text-slate-500"></span>
+                    </div>
+                    <p class="text-lg">「あったかポトフと、厚切りトースト」</p>
+                </div>
+
+                <!-- Rules -->
+                <div class="glass p-6">
+                    <h3 class="kids-font text-2xl font-bold mb-4 text-yellow-400"><i class="fa-solid fa-scroll"></i> 基地のルール</h3>
+                    <ul class="space-y-3 opacity-90">
+                        <li>・人の嫌がることはしない。</li>
+                        <li>・一日の出来事を、誰かに話してみる（話したくなければ黙っててもOK）。</li>
+                        <li>・宿題をここで終わらせてもいい。</li>
+                        <li>・夜20時になったら、気をつけて帰る。</li>
+                    </ul>
+                </div>
+
+                <!-- Staff -->
+                <div class="glass p-6">
+                    <h3 class="kids-font text-2xl font-bold mb-4 text-blue-400"><i class="fa-solid fa-user-group"></i> 基地の住人（スタッフ）</h3>
+                    <div class="flex items-center space-x-4">
+                        <div class="w-16 h-16 rounded-full bg-slate-700 flex-shrink-0 flex items-center justify-center">
+                            <i class="fa-solid fa-face-smile text-3xl"></i>
+                        </div>
+                        <div>
+                            <p class="font-bold">店主：たまりん</p>
+                            <p class="text-sm opacity-70">聞き上手な、元キャンプリーダー。カレー作りが得意。</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CTA -->
+                <div class="text-center py-10">
+                    <p class="mb-4">「今日、基地いくよ！」って教えてね</p>
+                    <button class="bg-[#06C755] hover:bg-[#05b34c] text-white font-bold py-4 px-10 rounded-full text-xl shadow-xl transition-transform hover:scale-105">
+                        <i class="fa-brands fa-line text-2xl mr-2"></i> 公式LINEで連絡する
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 3. PARENTS PAGE -->
+    <section id="parents" class="page parents-route">
+        <div class="max-w-3xl mx-auto">
+            <nav class="flex justify-between items-center mb-10 text-slate-500">
+                <button onclick="showPage('top')" class="hover:text-slate-800"><i class="fa-solid fa-arrow-left"></i> 戻る</button>
+                <span class="font-bold">tamari 管理室</span>
+            </nav>
+
+            <article class="space-y-12">
+                <div class="text-center">
+                    <h2 class="text-3xl font-bold mb-4 text-slate-800">「おかえり」を、<br>家族の代わりに言える場所。</h2>
+                    <div class="w-16 h-1 mx-auto bg-blue-500 rounded"></div>
+                </div>
+
+                <div class="glass p-8 bg-white">
+                    <h3 class="text-xl font-bold mb-4 flex items-center"><i class="fa-solid fa-heart text-red-400 mr-2"></i> 設立の想い</h3>
+                    <p class="leading-relaxed text-slate-600">
+                        共働きが増える現代、一人で夜ご飯を食べる子供たちがいます。
+                        私たちは、寂しい時間を「秘密基地での特別な時間」に変えたいと考えています。
+                        お腹を満たすだけでなく、一日の出来事を誰かに話せる、そんな「第二の家」を目指しています。
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="glass p-6 bg-white">
+                        <h4 class="font-bold mb-2 flex items-center"><i class="fa-solid fa-lock text-blue-500 mr-2"></i> 安心の体制</h4>
+                        <ul class="text-sm space-y-2 text-slate-600">
+                            <li>・入退室時のLINE通知</li>
+                            <li>・アレルギー情報の事前把握</li>
+                            <li>・研修を受けたスタッフが常駐</li>
+                        </ul>
+                    </div>
+                    <div class="glass p-6 bg-white">
+                        <h4 class="font-bold mb-2 flex items-center"><i class="fa-solid fa-clock text-blue-500 mr-2"></i> 利用のご案内</h4>
+                        <ul class="text-sm space-y-2 text-slate-600">
+                            <li>・対象：小5 〜 高校生</li>
+                            <li>・時間：17:00 〜 20:00</li>
+                            <li>・料金：1食 300円〜（定額制あり）</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="bg-blue-50 p-8 rounded-3xl text-center">
+                    <h4 class="font-bold mb-2 text-blue-800">保護者用LINEのご案内</h4>
+                    <p class="text-sm text-blue-600 mb-6">入退室通知や、栄養バランスを考えた今週の献立をお届けします。</p>
+                    <button class="bg-blue-600 text-white font-bold py-3 px-8 rounded-xl hover:bg-blue-700 transition-colors">
+                        保護者向けLINEに登録する
+                    </button>
+                </div>
+            </article>
+
+            <footer class="mt-20 py-10 text-center text-slate-400 text-xs border-t">
+                &copy; 2024 tamari - Kids Night Cafe. All rights reserved.
+            </footer>
+        </div>
+    </section>
+
+    <script>
+        // Page Switching Logic
+        function showPage(pageId) {
+            // Scroll to top
+            window.scrollTo(0, 0);
+            
+            // Hide all pages
+            document.querySelectorAll('.page').forEach(page => {
+                page.classList.remove('active');
+            });
+            
+            // Show specific page
+            const targetPage = document.getElementById(pageId);
+            targetPage.classList.add('active');
+
+            // Adjust background for parents page
+            if (pageId === 'parents') {
+                document.getElementById('starField').style.opacity = '0';
+            } else {
+                document.getElementById('starField').style.opacity = '1';
+            }
+        }
+
+        // Generate simple stars for background
+        function createStars() {
+            const starField = document.getElementById('starField');
+            const count = 100;
+            for (let i = 0; i < count; i++) {
+                const star = document.createElement('div');
+                const x = Math.random() * 100;
+                const y = Math.random() * 100;
+                const size = Math.random() * 2;
+                const opacity = Math.random();
+                
+                star.style.position = 'absolute';
+                star.style.left = `${x}%`;
+                star.style.top = `${y}%`;
+                star.style.width = `${size}px`;
+                star.style.height = `${size}px`;
+                star.style.backgroundColor = 'white';
+                star.style.borderRadius = '50%';
+                star.style.opacity = opacity;
+                
+                if (Math.random() > 0.8) {
+                    star.style.animation = `twinkle ${2 + Math.random() * 3}s infinite`;
+                }
+                
+                starField.appendChild(star);
+            }
+        }
+
+        // Star twinkle animation
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes twinkle {
+                0%, 100% { opacity: 0.3; }
+                50% { opacity: 1; }
+            }
+        `;
+        document.head.appendChild(style);
+
+        window.onload = createStars;
+    </script>
+</body>
+</html>
