@@ -1,0 +1,141 @@
+/* * tamari - スタイルシート
+ * 秘密基地のワクワク感と保護者への安心感を両立させるデザイン
+ */
+
+@import url('https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@400;700&family=Noto+Sans+JP:wght@400;700&display=swap');
+
+/* デザイン変数（色の定義） */
+:root {
+    --night-bg: #0f172a;        /* 夜の背景色 */
+    --warm-light: #fbbf24;      /* 暖かい光の色 */
+    --accent-orange: #f97316;   /* メニューなどのアクセント */
+    --kids-gradient: linear-gradient(to bottom, #0f172a, #1e1b4b);
+}
+
+/* 基本設定 */
+body {
+    font-family: 'Noto Sans JP', sans-serif;
+    background-color: var(--night-bg);
+    color: #f8fafc;
+    overflow-x: hidden;
+    margin: 0;
+    line-height: 1.6;
+}
+
+/* 子供向け：丸みのある可愛いフォント */
+.kids-font {
+    font-family: 'Zen Maru Gothic', serif;
+}
+
+/* 星空背景のレイヤー */
+.stars {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    background: radial-gradient(circle at center, #1e293b 0%, #0f172a 100%);
+    transition: opacity 0.8s ease;
+}
+
+/* 星自体のスタイル（JSで生成される） */
+.star {
+    position: absolute;
+    background-color: white;
+    border-radius: 50%;
+    pointer-events: none;
+}
+
+/* ページ切り替えのアニメーション */
+.page {
+    display: none;
+    min-height: 100vh;
+    padding: 2rem 1rem;
+    animation: fadeIn 0.8s ease-out forwards;
+}
+
+.active {
+    display: block;
+}
+
+@keyframes fadeIn {
+    from { 
+        opacity: 0; 
+        transform: translateY(15px); 
+    }
+    to { 
+        opacity: 1; 
+        transform: translateY(0); 
+    }
+}
+
+/* 星のまたたきアニメーション */
+@keyframes twinkle {
+    0%, 100% { opacity: 0.3; }
+    50% { opacity: 1; }
+}
+
+/* グラスモーフィズム（半透明のカードデザイン） */
+.glass {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 1.5rem;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* ボタンのホバーエフェクト（光る演出） */
+.btn-glow {
+    box-shadow: 0 0 15px rgba(251, 191, 36, 0.15);
+}
+
+.btn-glow:hover {
+    transform: scale(1.03);
+    box-shadow: 0 0 30px rgba(251, 191, 36, 0.4);
+    background: rgba(255, 255, 255, 0.08);
+}
+
+/* 子供向けルート：秘密基地の雰囲気 */
+.kids-route {
+    background: var(--kids-gradient);
+}
+
+.kids-route .glass:hover {
+    border-color: rgba(251, 191, 36, 0.3);
+}
+
+/* 保護者向けルート：明るく清潔・安心な雰囲気 */
+.parents-route {
+    background-color: #fdfcfb; /* 温かみのある白 */
+    color: #334155;
+}
+
+.parents-route .glass {
+    background: white;
+    border-color: #e2e8f0;
+    color: #334155;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05);
+}
+
+.parents-route .glass:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+}
+
+/* LINEボタンのカスタマイズ */
+.line-btn {
+    box-shadow: 0 10px 20px rgba(6, 199, 85, 0.3);
+}
+
+/* スマホ向けの微調整 */
+@media (max-width: 640px) {
+    .page {
+        padding: 1.5rem 1rem;
+    }
+    
+    h1 {
+        font-size: 3.5rem !important;
+    }
+}
